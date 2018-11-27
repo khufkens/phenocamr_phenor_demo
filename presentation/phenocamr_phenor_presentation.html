@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>phenocamr &amp; phenor tutorial</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Koen Hufkens" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# phenocamr &amp; phenor tutorial
+### Koen Hufkens
+### last updated: 2018-11-27
+
+---
+
+
+
+
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Two_toed_sloth.JPG)
+background-position: 50% 50%
+background-size: 100%
+class: center, bottom, inverse
+
+## modelling phenology the lazy way...
+
+---
+# phenocamr &amp; phenor
+
+--
+
+## - phenocamr: processing toolchain
+  - post-processing of phenocam time series
+  - generation of transition date (products)
+
+--
+
+## - phenor: modelling framework
+  - data prepartion
+  - model callibration
+  - model predictions
+
+---
+# phenor data sources
+
+- transition dates derived from [PhenoCam](https://phenocam.sr.unh.edu) time series
+- MODIS MCD12Q2 phenology product using the [MODISTools R package](http://onlinelibrary.wiley.com/doi/10.1002/ece3.1273/full) (in flux)
+- [Pan European Phenology data (PEP725)](http://www.pep725.eu/) 
+- [USA National Phenological Network (USA-NPN)](https://www.usanpn.org/) 
+
+---
+# Loading the required packages
+
+
+```r
+# install.packages("devtools")
+# install_github("khufkens/phenor")
+# install.packages("phenocamr")
+# install.packages("maps")
+
+library("phenocamr")
+library("phenor")
+library("maps")
+library("raster")
+```
+
+---
+# Downloading offline demo data
+
+You can download the presentation and demo files [as a zip file](https://github.com/khufkens/phenocamr_phenor_demo/archive/master.zip).
+
+or clone the repository
+
+``` bash
+git clone https://github.com/khufkens/phenocamr_phenor_demo.git
+
+```
+
+---
+# Downloading &amp; Processing PhenoCam data
+
+
+```r
+# The command below downloads all time series
+# for deciduous broadleaf regions of interest
+# at the bartlettir site
+phenocamr::download_phenocam(
+  frequency = 3,
+  veg_type = "DB",
+  roi_id = 1000,
+  site = "bartlettir",
+  phenophase = TRUE,
+  out_dir = "../data/"
+  )
+```
+
+```
+## Downloading: bartlettir_DB_1000_3day.csv
+```
+
+```
+## -- Flagging outliers!
+```
+
+```
+## -- Smoothing time series!
+```
+
+```
+## -- Estimating transition dates!
+```
+
+---
+# Downloading &amp; Processing PhenoCam data
+
+
+```r
+# load the time series data
+df &lt;- read.table(
+  "../data/bartlettir_DB_1000_3day.csv",
+  header = TRUE,
+  sep = ","
+  )
+
+# read in the transition date file
+td &lt;- read.table(
+  "../data/bartlettir_DB_1000_3day_transition_dates.csv",
+  header = TRUE,
+  sep = ","
+  )
+
+# select the rising (spring dates) for 25% threshold of Gcc 90
+td &lt;- td[td$direction == "rising" &amp; td$gcc_value == "gcc_90",]
+```
+
+---
+# Downloading &amp; Processing PhenoCam data
+
+
+```r
+# create a simple line graph 
+# of the smooth Green Chromatic Coordinate (Gcc)
+# and mark transition dates with vertical lines
+plot(as.Date(df$date), df$smooth_gcc_90, type = "l", xlab = "Date",
+     ylab = "Gcc (90th percentile)")
+points(x = as.Date(td$transition_25, origin = "1970-01-01"),
+       y = td$threshold_25,
+       pch = 19,
+       col = "red")
+```
+
+![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+# Downloading &amp; Processing PhenoCam data
+
+
+```r
+# Manually flagging of the outliers
+detect_outliers("../data/bartlettir_DB_1000_3day.csv",
+                out_dir = "../data/")
+
+# Manually smoothing the data
+smooth_ts("../data/bartlettir_DB_1000_3day.csv",
+          out_dir = "../data/",
+          force = TRUE)
+```
+
+---
+# Downloading &amp; Processing PhenoCam data
+
+
+```r
+# Generate phenological transition dates
+# for a different upper threshold (80% of amplitude)
+td &lt;- phenophases(
+  "../data/bartlettir_DB_1000_3day.csv",
+  internal = TRUE,
+  upper_thresh = 0.8)
+
+# split out the rising (spring) component for Gcc 90th
+td &lt;- td$rising[td$rising$gcc_value == "gcc_90",]
+```
+
+---
+# Downloading &amp; Processing PhenoCam data
+
+
+```r
+# we can now visualize the upper threshold
+plot(as.Date(df$date), df$smooth_gcc_90, type = "l",
+     xlab = "Date",
+     ylab = "Gcc (90th percentile)")
+points(x = as.Date(td$transition_80, origin = "1970-01-01"),
+       y = td$threshold_80,
+       pch = 19,
+       col = "red")
+```
+
+![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+--- 
+# Downloading other data sources
+
+- phenor specific
+- covered by the **download_()** functions
+- covers both phenology &amp; climate drivers
+
+---
+# Downloading PEP725 data
+
+
+```r
+# to list all species use
+species_list &lt;- phenor::check_pep725_species(list = TRUE)
+
+# to search only for Quercus (oak) use
+quercus_nr &lt;- phenor::check_pep725_species(species = "quercus")
+
+# return results
+head(species_list)
+```
+
+```
+##   number                   name
+## 1    148             abies alba
+## 2    115                   acer
+## 3    209    actinidia deliciosa
+## 4    101 aesculus hippocastanum
+## 5    102                  alnus
+## 6    103   alopecurus pratensis
+```
+
+```r
+print(quercus_nr)
+```
+
+```
+## [1] 111
+```
+
+---
+# Downloading PEP725 data
+
+- requires a login
+- saved as a text file
+
+
+```r
+phenor::download_pep725(
+  credentials = "pep725_credentials.txt",
+  species = 111,
+  path = ".",
+  internal = FALSE
+  )
+```
+
+---
+# Downloading climate driver data
+
+
+```r
+# download source cmip5 data into
+# your temporary directory
+# this code is not run (large download &gt;4GB)
+phenor::download_cmip5(
+  year = 2090,
+  path = tempdir(),
+  model = "MIROC5",
+  scenario = "rcp85"
+  )
+```
+
+---
+# Formatting phenor data
+
+- covered by the **format_()** functions
+- covers both phenology &amp; climate drivers
+- used in model calibration
+- used for projections (using climate drivers only)
+
+---
+# Formatting phenor data
+
+
+```r
+# Format the phenocam transition date data
+# using the phenor formatting routine
+phenocam_data &lt;- phenor::format_phenocam(
+  path = "../data/",
+  direction = "rising",
+  gcc_value = "gcc_90",
+  threshold = 50,
+  offset = 264,
+  internal = TRUE
+  )
+```
+
+```
+## Processing 1 sites
+## 
+  |                                                                       
+  |                                                                 |   0%
+  |                                                                       
+  |=================================================================| 100%
+```
+
+---
+# Formatting phenor data
+
+
+```
+## List of 1
+##  $ bartlettir:List of 13
+##   ..$ site            : chr "bartlettir"
+##   ..$ location        : num [1:2] 44.1 -71.3
+##   ..$ doy             : int [1:365] -102 -101 -100 -99 -98 -97 -96 -95 -94 -93 ...
+##   ..$ ltm             : num [1:365] 13.4 14 13.5 12.9 11.9 ...
+##   ..$ transition_dates: num [1:9] 133 129 122 133 130 128 136 130 138
+##   ..$ year            : num [1:9] 2008 2009 2010 2011 2012 ...
+##   ..$ Ti              : num [1:365, 1:9] 16 17.2 16.8 15.5 16.2 ...
+##   ..$ Tmini           : num [1:365, 1:9] 7 10 10.5 7.5 6.5 11 16 14.5 7.5 3 ...
+##   ..$ Tmaxi           : num [1:365, 1:9] 25 24.5 23 23.5 26 29 28.5 24 20 18 ...
+##   ..$ Li              : num [1:365, 1:9] 11.9 11.9 11.8 11.8 11.7 ...
+##   ..$ Pi              : num [1:365, 1:9] 0 0 0 0 0 0 5 6 0 0 ...
+##   ..$ VPDi            : num [1:365, 1:9] 1000 1240 1280 1040 960 1320 1800 1640 1040 760 ...
+##   ..$ georeferencing  : NULL
+##  - attr(*, "class")= chr "phenor_time_series_data"
+## NULL
+```
+
+---
+# Formatting phenor data
+
+
+```r
+# format the cmip5 data
+cmip5_data &lt;- phenor::format_cmip5(
+  path = tempdir(), 
+  year = 2090,
+  offset = 264,
+  model = "MIROC5",
+  scenario = "rcp85",
+  extent = c(-95, -65, 24, 50),
+  internal = FALSE
+  )
+```
+
+---
+# Model calibration
+
+
+```r
+# Calibrate a simple Thermal Time (TT) model
+# using the included demo data (phenocam_DB)
+phenocam_par &lt;- model_calibration(
+  model = "TT",
+  data = phenocam_DB,
+  method = "GenSA",
+  control = list(max.call = 4000))
+```
+
+```
+## 
+## Call:
+## lm(formula = data$transition_dates ~ out)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -26.374  -5.945  -1.231   4.303  36.428 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -2.71106    5.06995  -0.535    0.593    
+## out          1.01986    0.04132  24.682   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.801 on 356 degrees of freedom
+## Multiple R-squared:  0.6312,	Adjusted R-squared:  0.6301 
+## F-statistic: 609.2 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+```
+
+---
+# Model calibration
+
+![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+```
+## 
+## Call:
+## lm(formula = data$transition_dates ~ out)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -26.075  -5.820  -1.227   4.674  36.322 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  3.82452    4.79662   0.797    0.426    
+## out          0.96394    0.03897  24.733   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.789 on 356 degrees of freedom
+## Multiple R-squared:  0.6321,	Adjusted R-squared:  0.6311 
+## F-statistic: 611.7 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+```
+
+```
+## $model
+## [1] "TT"
+## 
+## $par
+## [1] 181.328810  -1.198648 371.515113
+## 
+## $rmse
+## [1] 8.795314
+## 
+## $rmse_null
+## [1] 14.45103
+## 
+## $aic
+## $aic$AIC
+## [1] 1562.741
+## 
+## $aic$AICc
+## [1] 1562.809
+## 
+## 
+## $bt_output
+## NULL
+```
+
+---
+# Model calibration
+
+
+```r
+# only list the TT model parameters, ignore other
+# ancillary fields
+print(phenocam_par$par)
+```
+
+```
+## [1] 180.757704  -2.309889 412.038179
+```
+
+---
+# Model projections
+
+
+```r
+# read in cmip5 data
+cmip5_data &lt;- readRDS("../data/phenor_cmip5_data_MIROC5_2090_rcp85.rds")
+
+# project results forward to 2090 using the phenocam parameters
+cmip5_phenocam_projection &lt;- phenor::estimate_phenology(
+  par = phenocam_par$par, # provide parameters
+  data = cmip5_data, # provide data
+  model = "TT", # make sure to use the same model !
+)
+```
+
+---
+# Model projections
+
+
+```r
+# plot the gridded results and overlay
+# a world map outline for reference
+par(oma = c(0,0,0,0))
+raster::plot(cmip5_phenocam_projection, main = "DOY")
+maps::map("world", add = TRUE)
+```
+
+![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+---
+# Reference
+
+For more information on both packages I refer to the paper:
+
+[Hufkens K., Basler J. D., Milliman T. Melaas E., Richardson A.D. 2018 An integrated phenology modelling framework in R: Phenology modelling with phenor. Methods in Ecology &amp; Evolution, 9: 1-10.](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12970)
+
+### Please use this reference whenever you use either packages!!
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
