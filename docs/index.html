@@ -152,7 +152,7 @@ points(x = as.Date(td$transition_25, origin = "1970-01-01"),
        col = "red")
 ```
 
-![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
 
 ---
 # Downloading &amp; Processing PhenoCam data
@@ -200,7 +200,7 @@ points(x = as.Date(td$transition_80, origin = "1970-01-01"),
        col = "red")
 ```
 
-![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 --- 
 # Downloading other data sources
@@ -370,24 +370,24 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -26.374  -5.945  -1.231   4.303  36.428 
+## -23.914  -5.693  -1.498   4.757  36.435 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -2.71106    5.06995  -0.535    0.593    
-## out          1.01986    0.04132  24.682   &lt;2e-16 ***
+## (Intercept)  2.64830    4.78998   0.553    0.581    
+## out          0.97319    0.03891  25.012   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.801 on 356 degrees of freedom
-## Multiple R-squared:  0.6312,	Adjusted R-squared:  0.6301 
-## F-statistic: 609.2 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.727 on 356 degrees of freedom
+## Multiple R-squared:  0.6373,	Adjusted R-squared:  0.6363 
+## F-statistic: 625.6 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ---
 # Model calibration
 
-![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
 ```
 ## 
@@ -396,18 +396,18 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -26.075  -5.820  -1.227   4.674  36.322 
+## -27.053  -5.613  -1.402   4.585  36.123 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  3.82452    4.79662   0.797    0.426    
-## out          0.96394    0.03897  24.733   &lt;2e-16 ***
+## (Intercept)  1.90067    4.91036   0.387    0.699    
+## out          0.98240    0.04002  24.549   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.789 on 356 degrees of freedom
-## Multiple R-squared:  0.6321,	Adjusted R-squared:  0.6311 
-## F-statistic: 611.7 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.831 on 356 degrees of freedom
+## Multiple R-squared:  0.6286,	Adjusted R-squared:  0.6276 
+## F-statistic: 602.7 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ```
@@ -415,20 +415,20 @@ phenocam_par &lt;- model_calibration(
 ## [1] "TT"
 ## 
 ## $par
-## [1] 181.328810  -1.198648 371.515113
+## [1] 182.3263  -1.0530 355.0116
 ## 
 ## $rmse
-## [1] 8.795314
+## [1] 8.811971
 ## 
 ## $rmse_null
 ## [1] 14.45103
 ## 
 ## $aic
 ## $aic$AIC
-## [1] 1562.741
+## [1] 1564.096
 ## 
 ## $aic$AICc
-## [1] 1562.809
+## [1] 1564.163
 ## 
 ## 
 ## $bt_output
@@ -446,7 +446,7 @@ print(phenocam_par$par)
 ```
 
 ```
-## [1] 180.757704  -2.309889 412.038179
+## [1] 175.557860  -3.896316 523.253417
 ```
 
 ---
@@ -477,7 +477,7 @@ raster::plot(cmip5_phenocam_projection, main = "DOY")
 maps::map("world", add = TRUE)
 ```
 
-![](phenocamr_phenor_presentation_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
 
 ---
 # Reference

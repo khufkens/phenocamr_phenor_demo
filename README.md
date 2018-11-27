@@ -16,4 +16,4 @@ library("maps")
 library("raster")
 ```
 
-The presentation which accompanies the data can be viewed in a browser and the source R markdown file is located in the presentation folder.
+The presentation which accompanies the data can be [viewed in a browser]() and the [source R markdown file](https://github.com/khufkens/phenocamr_phenor_demo/blob/master/docs/index.Rmd) is located in the docs folder.
