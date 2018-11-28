@@ -233,7 +233,7 @@ phenor::download_cmip5(
 ---
 # Formatting phenor data
 
-``` {r}
+```{r}
 # Format the phenocam transition date data
 # using the phenor formatting routine
 phenocam_data <- phenor::format_phenocam(
@@ -249,14 +249,14 @@ phenocam_data <- phenor::format_phenocam(
 ---
 # Formatting phenor data
 
-``` {r echo = FALSE}
+```{r echo = FALSE}
 print(str(phenocam_data))
 ```
 
 ---
 # Formatting phenor data
 
-``` {r eval = FALSE}
+```{r eval = FALSE}
 # format the cmip5 data
 cmip5_data <- phenor::format_cmip5(
   path = tempdir(), 
@@ -272,7 +272,7 @@ cmip5_data <- phenor::format_cmip5(
 ---
 # Model calibration
 
-``` {r fig.keep = "none"}
+```{r fig.keep = "none"}
 # Calibrate a simple Thermal Time (TT) model
 # using the included demo data (phenocam_DB)
 phenocam_par <- model_calibration(
@@ -285,7 +285,7 @@ phenocam_par <- model_calibration(
 ---
 # Model calibration
 
-``` {r echo = FALSE}
+```{r echo = FALSE}
 model_calibration(
   model = "TT",
   data = phenocam_DB,
@@ -296,7 +296,7 @@ model_calibration(
 ---
 # Model calibration
 
-``` {r}
+```{r}
 # only list the TT model parameters, ignore other
 # ancillary fields
 print(phenocam_par$par)
@@ -305,7 +305,7 @@ print(phenocam_par$par)
 ---
 # Model projections
 
-``` {r}
+```{r}
 # read in cmip5 data
 cmip5_data <- readRDS("../data/phenor_cmip5_data_MIROC5_2090_rcp85.rds")
 
@@ -313,14 +313,14 @@ cmip5_data <- readRDS("../data/phenor_cmip5_data_MIROC5_2090_rcp85.rds")
 cmip5_phenocam_projection <- phenor::estimate_phenology(
   par = phenocam_par$par, # provide parameters
   data = cmip5_data, # provide data
-  model = "TT", # make sure to use the same model !
+  model = "TT" # make sure to use the same model !
 )
 ```
 
 ---
 # Model projections
 
-``` {r, fig.width = 5, fig.height = 5}
+```{r, fig.width = 5, fig.height = 5}
 # plot the gridded results and overlay
 # a world map outline for reference
 par(oma = c(0,0,0,0))
