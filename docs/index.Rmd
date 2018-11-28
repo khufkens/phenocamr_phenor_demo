@@ -119,7 +119,7 @@ td <- td[td$direction == "rising" & td$gcc_value == "gcc_90",]
 
 # Downloading & Processing PhenoCam data
 
-```{r eval = TRUE}
+```{r eval = FALSE}
 str(df)
 str(td)
 ```
@@ -369,8 +369,6 @@ raster::plot(cmip5_projection_2090 - cmip5_projection_2010,
              main = expression(Delta * "DOY"))
 maps::map("world", add = TRUE)
 ```
-
-
 
 ---
 # Reference

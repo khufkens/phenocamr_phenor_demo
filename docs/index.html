@@ -146,86 +146,7 @@ td &lt;- td[td$direction == "rising" &amp; td$gcc_value == "gcc_90",]
 
 ```r
 str(df)
-```
-
-```
-## 'data.frame':	3346 obs. of  49 variables:
-##  $ date                : Factor w/ 3346 levels "2008-01-20","2008-01-21",..: 1 2 3 4 5 6 7 8 9 10 ...
-##  $ year                : int  2008 2008 2008 2008 2008 2008 2008 2008 2008 2008 ...
-##  $ doy                 : int  20 21 22 23 24 25 26 27 28 29 ...
-##  $ image_count         : int  NA NA NA NA NA NA NA NA NA NA ...
-##  $ midday_filename     : Factor w/ 1035 levels "bartlettir_2008_04_19_120541.jpg",..: NA NA NA NA NA NA NA NA NA NA ...
-##  $ midday_r            : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ midday_g            : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ midday_b            : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ midday_gcc          : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ midday_rcc          : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ r_mean              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ r_std               : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ g_mean              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ g_std               : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ b_mean              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ b_std               : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ gcc_mean            : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ gcc_std             : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ gcc_50              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ gcc_75              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ gcc_90              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ rcc_mean            : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ rcc_std             : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ rcc_50              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ rcc_75              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ rcc_90              : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ max_solar_elev      : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ snow_flag           : logi  NA NA NA NA NA NA ...
-##  $ outlierflag_gcc_mean: int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ outlierflag_gcc_50  : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ outlierflag_gcc_75  : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ outlierflag_gcc_90  : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ smooth_gcc_mean     : num  0.361 0.361 0.362 0.362 0.362 ...
-##  $ smooth_gcc_50       : num  0.361 0.362 0.362 0.362 0.363 ...
-##  $ smooth_gcc_75       : num  0.365 0.365 0.365 0.366 0.366 ...
-##  $ smooth_gcc_90       : num  0.367 0.367 0.367 0.367 0.367 ...
-##  $ smooth_rcc_mean     : num  0.326 0.327 0.327 0.327 0.327 ...
-##  $ smooth_rcc_50       : num  0.328 0.328 0.328 0.328 0.328 ...
-##  $ smooth_rcc_75       : num  0.335 0.335 0.335 0.335 0.335 ...
-##  $ smooth_rcc_90       : num  0.342 0.342 0.342 0.342 0.342 ...
-##  $ smooth_ci_gcc_mean  : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ smooth_ci_gcc_50    : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ smooth_ci_gcc_75    : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ smooth_ci_gcc_90    : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ smooth_ci_rcc_mean  : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ smooth_ci_rcc_50    : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ smooth_ci_rcc_75    : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ smooth_ci_rcc_90    : num  0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 ...
-##  $ int_flag            : int  1 1 1 1 1 1 1 1 1 1 ...
-```
-
-```r
 str(td)
-```
-
-```
-## 'data.frame':	9 obs. of  19 variables:
-##  $ site                  : Factor w/ 1 level "bartlettir": 1 1 1 1 1 1 1 1 1
-##  $ veg_type              : Factor w/ 1 level "DB": 1 1 1 1 1 1 1 1 1
-##  $ roi_id                : int  1000 1000 1000 1000 1000 1000 1000 1000 1000
-##  $ direction             : Factor w/ 2 levels "falling","rising": 2 2 2 2 2 2 2 2 2
-##  $ gcc_value             : Factor w/ 4 levels "gcc_50","gcc_75",..: 3 3 3 3 3 3 3 3 3
-##  $ transition_10         : Factor w/ 34 levels "2008-05-03","2008-05-04",..: 1 4 6 10 16 20 24 28 31
-##  $ transition_25         : Factor w/ 28 levels "2008-05-06","2008-05-07",..: 1 4 7 12 16 19 21 24 26
-##  $ transition_50         : Factor w/ 30 levels "2008-05-12","2008-09-20",..: 1 4 8 12 16 19 21 23 28
-##  $ transition_10_lower_ci: Factor w/ 38 levels "2008-05-02","2008-05-03",..: 1 6 11 15 19 24 28 32 35
-##  $ transition_25_lower_ci: Factor w/ 30 levels "2008-05-05","2008-05-06",..: 1 4 7 13 18 21 23 26 28
-##  $ transition_50_lower_ci: Factor w/ 26 levels "2008-05-10","2008-05-11",..: 1 4 7 10 12 14 17 20 23
-##  $ transition_10_upper_ci: Factor w/ 32 levels "2008-05-05","2008-05-06",..: 1 4 7 12 18 21 24 27 29
-##  $ transition_25_upper_ci: Factor w/ 29 levels "2008-05-08","2008-05-09",..: 1 4 7 11 15 18 20 23 26
-##  $ transition_50_upper_ci: Factor w/ 30 levels "2008-05-13","2008-09-19",..: 1 4 8 12 15 18 21 24 28
-##  $ threshold_10          : num  0.378 0.376 0.377 0.377 0.376 ...
-##  $ threshold_25          : num  0.392 0.389 0.392 0.394 0.391 ...
-##  $ threshold_50          : num  0.427 0.42 0.425 0.423 0.426 ...
-##  $ min_gcc               : num  0.37 0.366 0.369 0.367 0.365 ...
-##  $ max_gcc               : num  0.476 0.472 0.478 0.478 0.477 ...
 ```
 
 ---
@@ -430,14 +351,24 @@ phenocam_data &lt;- phenor::format_phenocam(
 
 ```r
 # format the cmip5 data
-cmip5_data &lt;- phenor::format_cmip5(
+cmip5_2090 &lt;- phenor::format_cmip5(
   path = tempdir(), 
   year = 2090,
   offset = 264,
   model = "MIROC5",
   scenario = "rcp85",
   extent = c(-95, -65, 24, 50),
-  internal = FALSE
+  internal = TRUE
+  )
+
+cmip5_2010 &lt;- phenor::format_cmip5(
+  path = tempdir(), 
+  year = 2010,
+  offset = 264,
+  model = "MIROC5",
+  scenario = "rcp85",
+  extent = c(-95, -65, 24, 50),
+  internal = TRUE
   )
 ```
 
@@ -462,18 +393,18 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -23.000  -5.637  -1.421   4.840  36.134 
+## -27.252  -5.830  -1.429   4.742  36.503 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  8.56056    4.51682   1.895   0.0589 .  
-## out          0.92439    0.03665  25.223   &lt;2e-16 ***
+## (Intercept) -3.63123    5.12760  -0.708    0.479    
+## out          1.02720    0.04178  24.583   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.68 on 356 degrees of freedom
-## Multiple R-squared:  0.6412,	Adjusted R-squared:  0.6402 
-## F-statistic: 636.2 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.823 on 356 degrees of freedom
+## Multiple R-squared:  0.6293,	Adjusted R-squared:  0.6283 
+## F-statistic: 604.3 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ---
@@ -488,18 +419,18 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -27.727  -5.600  -1.474   4.640  36.387 
+## -27.698  -5.662  -1.738   5.038  36.217 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  1.06660    4.93061   0.216    0.829    
-## out          0.98736    0.04011  24.617   &lt;2e-16 ***
+## (Intercept)  11.2078     4.6048   2.434   0.0154 *  
+## out           0.9086     0.0376  24.165   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.815 on 356 degrees of freedom
-## Multiple R-squared:  0.6299,	Adjusted R-squared:  0.6289 
-## F-statistic:   606 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.918 on 356 degrees of freedom
+## Multiple R-squared:  0.6213,	Adjusted R-squared:  0.6202 
+## F-statistic:   584 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ```
@@ -507,20 +438,20 @@ phenocam_par &lt;- model_calibration(
 ## [1] "TT"
 ## 
 ## $par
-## [1] 181.954723  -1.194414 363.805666
+## [1] 182.8867846   0.8516444 274.2359979
 ## 
 ## $rmse
-## [1] 8.805153
+## [1] 8.967041
 ## 
 ## $rmse_null
 ## [1] 14.45103
 ## 
 ## $aic
 ## $aic$AIC
-## [1] 1563.541
+## [1] 1576.586
 ## 
 ## $aic$AICc
-## [1] 1563.609
+## [1] 1576.654
 ## 
 ## 
 ## $bt_output
@@ -538,7 +469,7 @@ print(phenocam_par$par)
 ```
 
 ```
-## [1] 176.967605  -2.106223 435.972684
+## [1] 181.933015  -2.005979 393.029553
 ```
 
 ---
@@ -547,12 +478,20 @@ print(phenocam_par$par)
 
 ```r
 # read in cmip5 data
-cmip5_data &lt;- readRDS("../data/phenor_cmip5_data_MIROC5_2090_rcp85.rds")
+cmip5_2090 &lt;- readRDS("../data/phenor_cmip5_data_MIROC5_2090_rcp85.rds")
+cmip5_2010 &lt;- readRDS("../data/phenor_cmip5_data_MIROC5_2010_rcp85.rds")
 
 # project results forward to 2090 using the phenocam parameters
-cmip5_phenocam_projection &lt;- phenor::estimate_phenology(
+cmip5_projection_2090 &lt;- phenor::estimate_phenology(
   par = phenocam_par$par, # provide parameters
-  data = cmip5_data, # provide data
+  data = cmip5_2090, # provide data
+  model = "TT" # make sure to use the same model !
+)
+
+# project results forward to 2090 using the phenocam parameters
+cmip5_projection_2010 &lt;- phenor::estimate_phenology(
+  par = phenocam_par$par, # provide parameters
+  data = cmip5_2010, # provide data
   model = "TT" # make sure to use the same model !
 )
 ```
@@ -565,11 +504,26 @@ cmip5_phenocam_projection &lt;- phenor::estimate_phenology(
 # plot the gridded results and overlay
 # a world map outline for reference
 par(oma = c(0,0,0,0))
-raster::plot(cmip5_phenocam_projection, main = "DOY")
+raster::plot(cmip5_projection_2090, main = "DOY")
 maps::map("world", add = TRUE)
 ```
 
 ![](index_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+---
+# Model projections
+
+
+```r
+# plot the gridded results and overlay
+# a world map outline for reference
+par(oma = c(0,0,0,0))
+raster::plot(cmip5_projection_2090 - cmip5_projection_2010,
+             main = expression(Delta * "DOY"))
+maps::map("world", add = TRUE)
+```
+
+![](index_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
 # Reference
