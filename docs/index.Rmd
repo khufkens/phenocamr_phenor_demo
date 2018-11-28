@@ -73,6 +73,9 @@ git clone https://github.com/khufkens/phenocamr_phenor_demo.git
 
 ```
 
+Open the R markdown file of this presentation to explore the underlying code. The file is called `index.Rmd` and is located in `./docs/`.
+
+
 ---
 # Downloading & Processing PhenoCam data
 
@@ -110,6 +113,15 @@ td <- read.table(
 
 # select the rising (spring dates) for 25% threshold of Gcc 90
 td <- td[td$direction == "rising" & td$gcc_value == "gcc_90",]
+```
+
+---
+
+# Downloading & Processing PhenoCam data
+
+```{r eval = TRUE}
+str(df)
+str(td)
 ```
 
 ---
@@ -258,14 +270,24 @@ print(str(phenocam_data))
 
 ```{r eval = FALSE}
 # format the cmip5 data
-cmip5_data <- phenor::format_cmip5(
+cmip5_2090 <- phenor::format_cmip5(
   path = tempdir(), 
   year = 2090,
   offset = 264,
   model = "MIROC5",
   scenario = "rcp85",
   extent = c(-95, -65, 24, 50),
-  internal = FALSE
+  internal = TRUE
+  )
+
+cmip5_2010 <- phenor::format_cmip5(
+  path = tempdir(), 
+  year = 2010,
+  offset = 264,
+  model = "MIROC5",
+  scenario = "rcp85",
+  extent = c(-95, -65, 24, 50),
+  internal = TRUE
   )
 ```
 
@@ -307,12 +329,20 @@ print(phenocam_par$par)
 
 ```{r}
 # read in cmip5 data
-cmip5_data <- readRDS("../data/phenor_cmip5_data_MIROC5_2090_rcp85.rds")
+cmip5_2090 <- readRDS("../data/phenor_cmip5_data_MIROC5_2090_rcp85.rds")
+cmip5_2010 <- readRDS("../data/phenor_cmip5_data_MIROC5_2010_rcp85.rds")
 
 # project results forward to 2090 using the phenocam parameters
-cmip5_phenocam_projection <- phenor::estimate_phenology(
+cmip5_projection_2090 <- phenor::estimate_phenology(
   par = phenocam_par$par, # provide parameters
-  data = cmip5_data, # provide data
+  data = cmip5_2090, # provide data
+  model = "TT" # make sure to use the same model !
+)
+
+# project results forward to 2090 using the phenocam parameters
+cmip5_projection_2010 <- phenor::estimate_phenology(
+  par = phenocam_par$par, # provide parameters
+  data = cmip5_2010, # provide data
   model = "TT" # make sure to use the same model !
 )
 ```
@@ -324,9 +354,23 @@ cmip5_phenocam_projection <- phenor::estimate_phenology(
 # plot the gridded results and overlay
 # a world map outline for reference
 par(oma = c(0,0,0,0))
-raster::plot(cmip5_phenocam_projection, main = "DOY")
+raster::plot(cmip5_projection_2090, main = "DOY")
 maps::map("world", add = TRUE)
 ```
+
+---
+# Model projections
+
+```{r, fig.width = 5, fig.height = 5}
+# plot the gridded results and overlay
+# a world map outline for reference
+par(oma = c(0,0,0,0))
+raster::plot(cmip5_projection_2090 - cmip5_projection_2010,
+             main = expression(Delta * "DOY"))
+maps::map("world", add = TRUE)
+```
+
+
 
 ---
 # Reference
