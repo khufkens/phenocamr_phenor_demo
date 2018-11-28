@@ -47,7 +47,7 @@ class: center, bottom, inverse
 # phenor data sources
 
 - transition dates derived from [PhenoCam](https://phenocam.sr.unh.edu) time series
-- MODIS MCD12Q2 phenology product using the [MODISTools R package](http://onlinelibrary.wiley.com/doi/10.1002/ece3.1273/full) (in flux)
+- MODIS MCD12Q2 phenology product using the [MODISTools R package](http://onlinelibrary.wiley.com/doi/10.1002/ece3.1273/full)
 - [Pan European Phenology data (PEP725)](http://www.pep725.eu/) 
 - [USA National Phenological Network (USA-NPN)](https://www.usanpn.org/) 
 
@@ -393,18 +393,18 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -27.252  -5.830  -1.429   4.742  36.503 
+## -22.817  -5.547  -1.538   5.074  35.798 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -3.63123    5.12760  -0.708    0.479    
-## out          1.02720    0.04178  24.583   &lt;2e-16 ***
+## (Intercept)  4.91540    4.70464   1.045    0.297    
+## out          0.95902    0.03838  24.986   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.823 on 356 degrees of freedom
-## Multiple R-squared:  0.6293,	Adjusted R-squared:  0.6283 
-## F-statistic: 604.3 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.733 on 356 degrees of freedom
+## Multiple R-squared:  0.6368,	Adjusted R-squared:  0.6358 
+## F-statistic: 624.3 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ---
@@ -419,18 +419,18 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -27.698  -5.662  -1.738   5.038  36.217 
+## -23.489  -5.653  -1.542   4.833  36.170 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  11.2078     4.6048   2.434   0.0154 *  
-## out           0.9086     0.0376  24.165   &lt;2e-16 ***
+## (Intercept)  5.24367    4.67134   1.123    0.262    
+## out          0.95292    0.03797  25.095   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.918 on 356 degrees of freedom
-## Multiple R-squared:  0.6213,	Adjusted R-squared:  0.6202 
-## F-statistic:   584 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.709 on 356 degrees of freedom
+## Multiple R-squared:  0.6389,	Adjusted R-squared:  0.6378 
+## F-statistic: 629.7 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ```
@@ -438,20 +438,20 @@ phenocam_par &lt;- model_calibration(
 ## [1] "TT"
 ## 
 ## $par
-## [1] 182.8867846   0.8516444 274.2359979
+## [1] 177.336925  -2.824781 464.864189
 ## 
 ## $rmse
-## [1] 8.967041
+## [1] 8.718439
 ## 
 ## $rmse_null
 ## [1] 14.45103
 ## 
 ## $aic
 ## $aic$AIC
-## [1] 1576.586
+## [1] 1556.455
 ## 
 ## $aic$AICc
-## [1] 1576.654
+## [1] 1556.523
 ## 
 ## 
 ## $bt_output
@@ -469,7 +469,7 @@ print(phenocam_par$par)
 ```
 
 ```
-## [1] 181.933015  -2.005979 393.029553
+## [1] 176.457652  -3.513593 496.851233
 ```
 
 ---
