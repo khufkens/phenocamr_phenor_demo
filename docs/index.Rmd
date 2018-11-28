@@ -49,7 +49,7 @@ class: center, bottom, inverse
 ---
 # Loading the required packages
 
-``` {r message = FALSE}
+```{r message = FALSE}
 # install.packages("devtools")
 # install_github("khufkens/phenor")
 # install.packages("phenocamr")
@@ -76,7 +76,7 @@ git clone https://github.com/khufkens/phenocamr_phenor_demo.git
 ---
 # Downloading & Processing PhenoCam data
 
-``` {r eval = TRUE}
+```{r eval = TRUE}
 # The command below downloads all time series
 # for deciduous broadleaf regions of interest
 # at the bartlettir site
@@ -93,7 +93,7 @@ phenocamr::download_phenocam(
 ---
 # Downloading & Processing PhenoCam data
 
-``` {r eval = TRUE}
+```{r eval = TRUE}
 # load the time series data
 df <- read.table(
   "../data/bartlettir_DB_1000_3day.csv",
@@ -115,7 +115,7 @@ td <- td[td$direction == "rising" & td$gcc_value == "gcc_90",]
 ---
 # Downloading & Processing PhenoCam data
 
-``` {r, fig.width = 9, fig.height = 4}
+```{r, fig.width = 9, fig.height = 4}
 # create a simple line graph 
 # of the smooth Green Chromatic Coordinate (Gcc)
 # and mark transition dates with vertical lines
@@ -130,7 +130,7 @@ points(x = as.Date(td$transition_25, origin = "1970-01-01"),
 ---
 # Downloading & Processing PhenoCam data
 
-``` {r}
+```{r}
 # Manually flagging of the outliers
 detect_outliers("../data/bartlettir_DB_1000_3day.csv",
                 out_dir = "../data/")
@@ -144,7 +144,7 @@ smooth_ts("../data/bartlettir_DB_1000_3day.csv",
 ---
 # Downloading & Processing PhenoCam data
 
-``` {r}
+```{r}
 # Generate phenological transition dates
 # for a different upper threshold (80% of amplitude)
 td <- phenophases(
@@ -159,7 +159,7 @@ td <- td$rising[td$rising$gcc_value == "gcc_90",]
 ---
 # Downloading & Processing PhenoCam data
 
-``` {r, fig.width = 9, fig.height = 4}
+```{r, fig.width = 9, fig.height = 4}
 # we can now visualize the upper threshold
 plot(as.Date(df$date), df$smooth_gcc_90, type = "l",
      xlab = "Date",
@@ -180,7 +180,7 @@ points(x = as.Date(td$transition_80, origin = "1970-01-01"),
 ---
 # Downloading PEP725 data
 
-``` {r}
+```{r}
 # to list all species use
 species_list <- phenor::check_pep725_species(list = TRUE)
 
@@ -198,7 +198,7 @@ print(quercus_nr)
 - requires a login
 - saved as a text file
 
-``` {r eval = FALSE}
+```{r eval = FALSE}
 phenor::download_pep725(
   credentials = "pep725_credentials.txt",
   species = 111,
@@ -210,7 +210,7 @@ phenor::download_pep725(
 ---
 # Downloading climate driver data
 
-``` {r eval = FALSE}
+```{r eval = FALSE}
 # download source cmip5 data into
 # your temporary directory
 # this code is not run (large download >4GB)
