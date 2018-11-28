@@ -181,7 +181,7 @@ points(x = as.Date(td$transition_80, origin = "1970-01-01"),
        col = "red")
 ```
 
---- 
+---
 # Downloading other data sources
 
 - phenor specific
