@@ -140,7 +140,6 @@ td &lt;- td[td$direction == "rising" &amp; td$gcc_value == "gcc_90",]
 ```
 
 ---
-
 # Downloading &amp; Processing PhenoCam data
 
 
@@ -393,18 +392,18 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -22.817  -5.547  -1.538   5.074  35.798 
+## -23.337  -5.703  -1.669   4.865  35.938 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  4.91540    4.70464   1.045    0.297    
-## out          0.95902    0.03838  24.986   &lt;2e-16 ***
+## (Intercept)  2.32136    4.81286   0.482     0.63    
+## out          0.98035    0.03928  24.961   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.733 on 356 degrees of freedom
-## Multiple R-squared:  0.6368,	Adjusted R-squared:  0.6358 
-## F-statistic: 624.3 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.738 on 356 degrees of freedom
+## Multiple R-squared:  0.6364,	Adjusted R-squared:  0.6354 
+## F-statistic:   623 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ---
@@ -419,18 +418,18 @@ phenocam_par &lt;- model_calibration(
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -23.489  -5.653  -1.542   4.833  36.170 
+## -27.667  -5.565  -1.463   4.628  36.425 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  5.24367    4.67134   1.123    0.262    
-## out          0.95292    0.03797  25.095   &lt;2e-16 ***
+## (Intercept)   0.7438     4.9424    0.15     0.88    
+## out           0.9898     0.0402   24.62   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 8.709 on 356 degrees of freedom
-## Multiple R-squared:  0.6389,	Adjusted R-squared:  0.6378 
-## F-statistic: 629.7 on 1 and 356 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 8.814 on 356 degrees of freedom
+## Multiple R-squared:  0.6301,	Adjusted R-squared:  0.629 
+## F-statistic: 606.3 on 1 and 356 DF,  p-value: &lt; 2.2e-16
 ```
 
 ```
@@ -438,20 +437,20 @@ phenocam_par &lt;- model_calibration(
 ## [1] "TT"
 ## 
 ## $par
-## [1] 177.336925  -2.824781 464.864189
+## [1] 182.30158  -1.24394 366.05075
 ## 
 ## $rmse
-## [1] 8.718439
+## [1] 8.80436
 ## 
 ## $rmse_null
 ## [1] 14.45103
 ## 
 ## $aic
 ## $aic$AIC
-## [1] 1556.455
+## [1] 1563.477
 ## 
 ## $aic$AICc
-## [1] 1556.523
+## [1] 1563.545
 ## 
 ## 
 ## $bt_output
@@ -469,7 +468,7 @@ print(phenocam_par$par)
 ```
 
 ```
-## [1] 176.457652  -3.513593 496.851233
+## [1] 177.330135  -3.468603 487.207863
 ```
 
 ---

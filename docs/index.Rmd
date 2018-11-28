@@ -116,7 +116,6 @@ td <- td[td$direction == "rising" & td$gcc_value == "gcc_90",]
 ```
 
 ---
-
 # Downloading & Processing PhenoCam data
 
 ```{r eval = FALSE}
@@ -307,7 +306,7 @@ phenocam_par <- model_calibration(
 ---
 # Model calibration
 
-```{r echo = FALSE}
+```{r echo = FALSE, message=FALSE, asis="hide"}
 model_calibration(
   model = "TT",
   data = phenocam_DB,
