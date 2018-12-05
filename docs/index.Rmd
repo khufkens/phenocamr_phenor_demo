@@ -51,7 +51,7 @@ class: center, bottom, inverse
 
 ```{r message = FALSE}
 # install.packages("devtools")
-# install_github("khufkens/phenor")
+# devtools::install_github("khufkens/phenor")
 # install.packages("phenocamr")
 # install.packages("maps")
 
